@@ -5,8 +5,11 @@ from util import abrir_json
 # the base form of this snipet was taken from:
 # https://stackoverflow.com/questions/18413229/enqueue-files-to-playlist-in-winamp-with-python
 
-number_of_songs = 20
-root = abrir_json('config.json')['root']
+
+config = abrir_json('config.json')
+
+number_of_songs = config['songs']
+root = config['root']
 while number_of_songs > 0:
     filename = choice(listdir(root))
     if filename.endswith('mp3'):
