@@ -9,7 +9,7 @@ for basepath, _, files in walk(root):
     ruta = '/'.join(basepath.split('\\'))
     for file in files:
         if file.endswith('.mp3'):
-            data.append({'root': '/'.join([ruta, file])})
+            data.append({'song': '/'.join([ruta, file]), 'weight': 1})
 
 filename = 'songlist.json'
 guardar_json(data, filename)
