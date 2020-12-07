@@ -1,5 +1,5 @@
 from util import abrir_json, guardar_json
-from weighted_choice import choose_value
+from lib.weighted_choice import choose_value
 from constantes import MOCKMODE
 from os import startfile
 
