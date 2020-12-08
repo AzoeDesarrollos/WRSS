@@ -28,7 +28,7 @@ import re
 from sys import stdout
 
 
-PATTERN = re.compile('\.(mp3|ogg)$', re.I)
+PATTERN = re.compile(r'.(mp3|ogg)$', re.I)
 
 
 def parse_args():
@@ -54,8 +54,8 @@ def generate_playlist(filenames):
     total = 0
 
     entry_template = (
-        'File{number:d}={file}\n'
-        'Title{number:d}={title}\n'
+        'File{number:d}={file}\n\n'
+        'Title{number:d}={title}\n\n'
         'Length{number:d}=-1\n\n')
 
     for track_entry in generate_track_entries(filenames):
