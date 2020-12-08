@@ -1,4 +1,3 @@
 /.idea/
-/songlist.json
-config.json
-/songs
+/config/
+/build/

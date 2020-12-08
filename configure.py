@@ -1,11 +1,12 @@
-from util import abrir_json, guardar_json
+from back.util import abrir_json, guardar_json
 from importlib import import_module
-from constantes import refresh, refresh_weights
+import os
 
 config = abrir_json('config.json')
 songlist = abrir_json('songlist.json')
 
 opciones = [
+    'Generar una lista de reproducción',
     'Actualizar la cantidad de canciones',
     'Cambiar la ruta base de las canciones',
     'Cambiar los pesos de las canciones',
@@ -18,37 +19,46 @@ opciones = [
 
 while True:
     key, value = None, None
+    os.system(['clear', 'cls'][os.name == 'nt'])
     for i, opcion in enumerate(opciones):
         print(i, ': ', opcion, sep='')
     print('\nElija una opción, ¿que desea hacer?')
     op = int(input('> '))
     opcion = opciones[op] if 0 <= op <= len(opciones)-1 else None
+    if opcion == 'Generar una lista de reproducción':
+        import_module('lib.write_and_play')
+        import_module('back.rate')
 
-    if opcion == 'Actualizar la cantidad de canciones':
+    elif opcion == 'Actualizar la cantidad de canciones':
         value = int(input('\n¿Cuantas canciones? '))
         key = 'songs'
 
     elif opcion == 'Cambiar la ruta base de las canciones':
+        print('La ruta actual es: {}'.format(config['root']))
         print('\nIngrese la nueva ruta')
         value = input('> ')
         key = 'root'
 
     elif opcion == 'Cambiar los pesos de las canciones':
-        pass
+        print('Ésta operación aun no se encuentra disponible')
+        print(len(songlist))
+        input('<Presione Enter para continuar>')
 
     elif opcion == 'Restaurar los pesos de las canciones':
-        r = input('\n¿Desea restaurar los pesos de las canciones? ').lower().startswith('s')
-        refresh(r)
-        import_module('update_songlist')
+        value = input('\n¿Desea restaurar los pesos de las canciones? ').lower().startswith('s')
+        key = 'weights'
+
+        import_module('back.update_songlist')
 
     elif opcion == 'Actualizar la lista de canciones':
         go = True
-        if refresh_weights:
+
+        if config['weights']:
             print('\nAlerta: Esta acción restablecerá los pesos de las canciones')
             go = input('¿Desea continuar?').lower().startswith('s')
 
         if go:
-            import_module('update_songlist')
+            import_module('back.update_songlist')
 
     elif opcion == 'Conservar la lista de reproducción':
         value = input('\n¿Desea conservar las listas de reproducción generadas? ').lower().startswith('s')

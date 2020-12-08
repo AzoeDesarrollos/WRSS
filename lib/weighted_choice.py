@@ -1,4 +1,7 @@
 from random import random
+from back.util import abrir_json
+
+config = abrir_json('config.json')
 
 
 def choose_value(options):
@@ -21,7 +24,8 @@ def choose_value(options):
     for i, option in enumerate(options):
         if rand < option['weight']:
             choice = options[i]['song']
-            option['weight'] = 1  # Reset weight to small value
+            if not option[i].get('Favourite', False) and config['reset']:
+                option['weight'] = 1  # Reset weight to small value
             break
         else:
             rand -= option['weight']
