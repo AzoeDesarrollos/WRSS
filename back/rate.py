@@ -17,7 +17,7 @@ while True:
         op = int(input('Canción Favorita: '))
         if 0 <= op <= len(chosen):
             idx = songnames.index(chosen[op])
-            if songlist[idx].get('Favourite', False):
+            if not songlist[idx].get('Favourite', False):
                 songlist[idx]['Favourite'] = True
             else:
                 print('\nEsta canción ya está señalada como una de tus favoritas')
