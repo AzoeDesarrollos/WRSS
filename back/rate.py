@@ -24,7 +24,7 @@ while True:
                 input('<Presiona Enter para continuar>')
 
     else:
-        guardar_json(songlist, 'config/songlist.json')
+        guardar_json(songlist, 'songlist.json')
         os.remove('config/chosen.json')
         os.system(['clear', 'cls'][os.name == 'nt'])
         break

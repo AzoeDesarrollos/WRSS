@@ -24,7 +24,7 @@ def choose_value(options):
     for i, option in enumerate(options):
         if rand < option['weight']:
             choice = options[i]['song']
-            if not option[i].get('Favourite', False) and config['reset']:
+            if not options[i].get('Favourite', False) and config['reset']:
                 option['weight'] = 1  # Reset weight to small value
             break
         else:

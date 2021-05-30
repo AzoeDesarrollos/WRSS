@@ -23,7 +23,12 @@ while True:
     for i, opcion in enumerate(opciones):
         print(i, ': ', opcion, sep='')
     print('\nElija una opción, ¿que desea hacer?')
-    op = int(input('> '))
+    while True:
+        op = input('> ')
+        if op.isnumeric():
+            op = int(op)
+            break
+
     opcion = opciones[op] if 0 <= op <= len(opciones)-1 else None
     if opcion == 'Generar una lista de reproducción':
         import_module('lib.write_and_play')
