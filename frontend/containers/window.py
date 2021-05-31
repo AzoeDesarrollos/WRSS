@@ -66,7 +66,7 @@ class Window(BaseWidget):
         key, value = None, None
         if opcion == 'Generar una lista de reproducción.':
             import_module('lib.write_and_play')
-            import_module('backend.rate')
+            # import_module('backend.rate')
 
         elif opcion == 'Actualizar la cantidad de canciones.':
             key = 'songs'

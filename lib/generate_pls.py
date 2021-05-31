@@ -23,10 +23,11 @@ __ http://forums.winamp.com/showthread.php?threadid=65772
 from argparse import ArgumentParser
 from itertools import count
 import os.path
+# noinspection PyCompatibility
 from pathlib import Path
 import re
 from sys import stdout
-
+from lib.tinytag import TinyTag
 
 PATTERN = re.compile(r'.(mp3|ogg)$', re.I)
 
@@ -56,7 +57,7 @@ def generate_playlist(filenames):
     entry_template = (
         'File{number:d}={file}\n\n'
         'Title{number:d}={title}\n\n'
-        'Length{number:d}=-1\n\n')
+        'Length{number:d}={duration}\n\n')
 
     for track_entry in generate_track_entries(filenames):
         total += 1
@@ -78,10 +79,14 @@ def create_track_entry(number, path):
     """Create a track entry."""
     title = path.stem
 
+    tags = TinyTag.get(path)
+    if tags.artist is not None and tags.title is not None:
+        title = tags.artist.strip()+' - '+tags.title.strip()
     return {
         'number': number,
         'file': path,
         'title': title,
+        'duration': str(round(tags.duration))
     }
 
 
