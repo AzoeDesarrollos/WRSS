@@ -1,5 +1,5 @@
 from random import random
-from back.util import abrir_json
+from backend.util import abrir_json
 
 config = abrir_json('config.json')
 

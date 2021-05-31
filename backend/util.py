@@ -1,7 +1,12 @@
+from .eventhandler import EventHandler
+from os import path, getcwd, mkdir
+from pygame import quit
+from sys import exit
 import json
-from os import path, getcwd
 
 r = path.join(getcwd(), 'config')
+if not path.exists(r):
+    mkdir(r)
 
 
 def abrir_json(ruta):
@@ -24,3 +29,12 @@ if not path.exists(route):
                'default': 'playlist',
                'weights': False}
     guardar_json(default, route)
+
+
+def salir_handler(event):
+    print('Status:' + event.data['texto'])
+    quit()
+    exit()
+
+
+EventHandler.register(salir_handler, 'salir')

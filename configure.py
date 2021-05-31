@@ -1,4 +1,4 @@
-from back.util import abrir_json, guardar_json
+from backend.util import abrir_json, guardar_json
 from importlib import import_module
 import os
 
@@ -53,7 +53,7 @@ while True:
         value = input('\n¿Desea restaurar los pesos de las canciones? ').lower().startswith('s')
         key = 'weights'
 
-        import_module('back.update_songlist')
+        import_module('backend.update_songlist')
 
     elif opcion == 'Actualizar la lista de canciones':
         go = True
@@ -63,7 +63,7 @@ while True:
             go = input('¿Desea continuar?').lower().startswith('s')
 
         if go:
-            import_module('back.update_songlist')
+            import_module('backend.update_songlist')
 
     elif opcion == 'Conservar la lista de reproducción':
         value = input('\n¿Desea conservar las listas de reproducción generadas? ').lower().startswith('s')
