@@ -27,7 +27,7 @@ else:
     name = config['default'] + '.pls'
 
 ruta = path.join(getcwd(), name)
-with open(path.join(ruta), 'wt', encoding='utf-8') as file:
+with open(path.join(ruta), 'wt', encoding='latin_1') as file:
     file.writelines(generate_playlist(chosen_songs_filename))
 
 startfile(ruta)
